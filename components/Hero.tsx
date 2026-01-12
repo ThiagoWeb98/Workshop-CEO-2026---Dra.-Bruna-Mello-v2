@@ -71,13 +71,9 @@ const Hero: React.FC = () => {
                 src="assets/dra-bruna-hero.webp" 
                 alt="Dra. Bruna Mello - CEO" 
                 className="absolute inset-0 w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 scale-105 group-hover:scale-100"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = '0.1'; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a120b] via-transparent to-transparent"></div>
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 pointer-events-none">
-                 <div className="w-px h-16 md:h-32 bg-gradient-to-b from-[#c8a178] to-transparent mb-8"></div>
-                 <span className="font-serif italic text-xl md:text-2xl text-[#c5a689] tracking-widest uppercase opacity-20">Dra. Bruna Mello</span>
-              </div>
               <div className="absolute top-4 left-4 md:top-8 md:left-8 w-8 h-8 md:w-12 md:h-12 border-t border-l border-[#c8a178]/30"></div>
               <div className="absolute bottom-4 right-4 md:bottom-8 md:right-8 w-8 h-8 md:w-12 md:h-12 border-b border-r border-[#c8a178]/30"></div>
            </div>
