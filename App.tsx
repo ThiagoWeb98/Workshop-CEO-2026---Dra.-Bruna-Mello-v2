@@ -13,29 +13,39 @@ import AIAdvisor from './components/AIAdvisor';
 
 const App: React.FC = () => {
   useEffect(() => {
-    // Observador Global para disparar as animações de slide-reveal em todo o site
+    // Observador Global para disparar as animações
     const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: 0.05,
+      rootMargin: '0px 0px -20px 0px'
     };
 
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
+          // Uma vez revelado, não precisa mais observar
+          revealObserver.unobserve(entry.target);
         }
       });
     }, observerOptions);
 
     const revealElements = document.querySelectorAll('.slide-reveal');
-    revealElements.forEach((el) => revealObserver.observe(el));
+    revealElements.forEach((el) => {
+      // Se o elemento já estiver na tela no load, ativa imediatamente
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('active');
+      } else {
+        revealObserver.observe(el);
+      }
+    });
 
     return () => revealObserver.disconnect();
   }, []);
 
   return (
     <div className="min-h-screen selection:bg-[#c8a178] selection:text-[#1a120b] bg-[#1a120b]">
-      {/* Navigation Bar - Responsive Sticky */}
+      {/* Navigation Bar */}
       <nav className="sticky top-0 w-full bg-[#1a120b]/95 backdrop-blur-md text-[#f2f0ed] py-3 md:py-4 px-4 text-center border-b border-[#c8a178]/20 z-[100] shadow-xl">
         <div className="container mx-auto flex flex-col md:flex-row justify-center items-center gap-1 md:gap-4">
           <span className="text-[8px] md:text-[10px] tracking-[0.2em] md:tracking-[0.5em] uppercase font-bold text-[#c8a178]">
@@ -58,7 +68,9 @@ const App: React.FC = () => {
         <VideoSection />
       </div>
       
-      <DiscountTicker />
+      <div className="slide-reveal">
+        <DiscountTicker />
+      </div>
       
       <AccessSection />
       

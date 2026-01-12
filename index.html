@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --color-black: #1a120b;
@@ -78,13 +78,20 @@
         /* Efeito de Slide para Baixo / Revelação */
         .slide-reveal {
             opacity: 0;
-            transform: translateY(-40px);
-            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
         }
 
         .slide-reveal.active {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Fallback para caso o JS falhe ou demore */
+        noscript .slide-reveal {
+            opacity: 1 !important;
+            transform: none !important;
         }
 
         ::-webkit-scrollbar {
