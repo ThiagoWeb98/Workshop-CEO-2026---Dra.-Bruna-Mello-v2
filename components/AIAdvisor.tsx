@@ -15,7 +15,16 @@ const AIAdvisor: React.FC = () => {
     setResponse('');
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+      // Verificação segura de API KEY
+      const apiKey = typeof process !== 'undefined' && process.env ? process.env.API_KEY : '';
+      
+      if (!apiKey) {
+        setResponse("A sala de estratégia está em manutenção técnica no momento.");
+        setIsLoading(false);
+        return;
+      }
+
+      const ai = new GoogleGenAI({ apiKey });
       const res = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
         contents: `Você é o Consultor Estratégico da Dra. Bruna Mello no Workshop CEO 2026. 
@@ -64,7 +73,7 @@ const AIAdvisor: React.FC = () => {
             </button>
           </div>
           
-          <div ref={scrollRef} className="p-6 md:p-8 h-[300px] md:h-[400px] overflow-y-auto space-y-6 bg-[#1a120b]/90">
+          <div ref={scrollRef} className="p-6 md:p-8 h-[300px] md:h-[400px] overflow-y-auto space-y-6 bg-[#1a120b]/90 text-[#f2f0ed]">
             <div className="border-l border-[#c8a178] pl-4 py-2 text-[10px] md:text-[11px] text-[#c5a689] italic leading-relaxed">
               "Bem-vinda ao círculo interno. Qual decisão estratégica você precisa tomar hoje para destravar o lucro da sua clínica?"
             </div>
@@ -84,7 +93,7 @@ const AIAdvisor: React.FC = () => {
             )}
           </div>
           
-          <div className="p-4 md:p-6 bg-[#1a120b] flex gap-3">
+          <div className="p-4 md:p-6 bg-[#1a120b] flex gap-3 border-t border-[#c8a178]/10">
             <input 
               type="text" 
               value={query}

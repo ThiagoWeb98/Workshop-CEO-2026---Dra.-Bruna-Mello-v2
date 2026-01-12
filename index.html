@@ -30,7 +30,7 @@
             font-family: 'Bodoni Moda', serif;
         }
 
-        /* Fine grain texture overlay */
+        /* Textura de luxo sobreposta */
         body::before {
             content: "";
             position: fixed;
@@ -75,23 +75,23 @@
             animation: float-luxury 6s ease-in-out infinite;
         }
 
-        /* Efeito de Slide para Baixo / Revelação */
+        /* Efeito de Revelação: Visível por padrão para evitar tela preta */
         .slide-reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 1s ease-out, transform 1s ease-out;
             will-change: opacity, transform;
         }
 
-        .slide-reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        /* Só esconde se o JS estiver ativo e o elemento ainda não tiver a classe 'active' */
+        .js-enabled .slide-reveal:not(.active) {
+            opacity: 0;
+            transform: translateY(20px);
         }
 
-        /* Fallback para caso o JS falhe ou demore */
-        noscript .slide-reveal {
+        .slide-reveal.active {
             opacity: 1 !important;
-            transform: none !important;
+            transform: translateY(0) !important;
         }
 
         ::-webkit-scrollbar {
@@ -104,6 +104,10 @@
             background: #c8a178;
         }
     </style>
+    <script>
+        // Adiciona classe indicando que o navegador suporta e está rodando JS
+        document.documentElement.classList.add('js-enabled');
+    </script>
 <script type="importmap">
 {
   "imports": {

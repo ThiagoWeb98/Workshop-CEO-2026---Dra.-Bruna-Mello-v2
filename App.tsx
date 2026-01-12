@@ -13,32 +13,37 @@ import AIAdvisor from './components/AIAdvisor';
 
 const App: React.FC = () => {
   useEffect(() => {
-    // Observador Global para disparar as animações
+    // Garante que a classe js-enabled está presente
+    document.documentElement.classList.add('js-enabled');
+
     const observerOptions = {
       threshold: 0.05,
-      rootMargin: '0px 0px -20px 0px'
+      rootMargin: '0px 0px -50px 0px'
     };
 
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
-          // Uma vez revelado, não precisa mais observar
           revealObserver.unobserve(entry.target);
         }
       });
     }, observerOptions);
 
     const revealElements = document.querySelectorAll('.slide-reveal');
-    revealElements.forEach((el) => {
-      // Se o elemento já estiver na tela no load, ativa imediatamente
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight) {
-        el.classList.add('active');
-      } else {
-        revealObserver.observe(el);
-      }
-    });
+    
+    // Pequeno delay para garantir que o navegador processou o layout inicial
+    setTimeout(() => {
+      revealElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        // Se já estiver visível na janela ou logo abaixo, ativa imediatamente
+        if (rect.top < window.innerHeight + 100) {
+          el.classList.add('active');
+        } else {
+          revealObserver.observe(el);
+        }
+      });
+    }, 100);
 
     return () => revealObserver.disconnect();
   }, []);
