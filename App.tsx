@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Hero from './components/Hero';
 import PainPleasure from './components/PainPleasure';
 import VideoSection from './components/VideoSection';
@@ -12,6 +12,27 @@ import FAQ from './components/FAQ';
 import AIAdvisor from './components/AIAdvisor';
 
 const App: React.FC = () => {
+  useEffect(() => {
+    // Observador Global para disparar as animações de slide-reveal em todo o site
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    const revealElements = document.querySelectorAll('.slide-reveal');
+    revealElements.forEach((el) => revealObserver.observe(el));
+
+    return () => revealObserver.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen selection:bg-[#c8a178] selection:text-[#1a120b] bg-[#1a120b]">
       {/* Navigation Bar - Responsive Sticky */}
@@ -28,16 +49,25 @@ const App: React.FC = () => {
       </nav>
 
       <Hero />
-      <PainPleasure />
-      <VideoSection />
+      
+      <div className="slide-reveal">
+        <PainPleasure />
+      </div>
+
+      <div className="slide-reveal">
+        <VideoSection />
+      </div>
       
       <DiscountTicker />
+      
       <AccessSection />
       
-      <ToolboxSection />
+      <div className="slide-reveal">
+        <ToolboxSection />
+      </div>
       
-      {/* Bio Section - Refined Responsiveness */}
-      <section className="py-24 md:py-40 bg-[#1a120b] border-y border-[#c8a178]/10 relative overflow-hidden">
+      {/* Bio Section */}
+      <section className="py-24 md:py-40 bg-[#1a120b] border-y border-[#c8a178]/10 relative overflow-hidden slide-reveal">
         <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-center relative z-10">
           <div className="order-2 lg:order-1 aspect-[3/4] md:aspect-square lg:aspect-[3/4] max-w-lg mx-auto w-full bg-[#241b14] relative shadow-[0_30px_60px_rgba(0,0,0,0.8)] group overflow-hidden">
              <img 
@@ -76,12 +106,17 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      <div id="offer">
+      <div id="offer" className="slide-reveal">
         <Offer />
       </div>
       
-      <Guarantee />
-      <FAQ />
+      <div className="slide-reveal">
+        <Guarantee />
+      </div>
+
+      <div className="slide-reveal">
+        <FAQ />
+      </div>
       
       <footer className="bg-[#1a120b] py-20 md:py-32 px-6 border-t border-[#c8a178]/5">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 md:gap-16">

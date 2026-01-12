@@ -11,10 +11,6 @@ const Offer: React.FC = () => {
     "Checklist Ralos Invisíveis"
   ];
 
-  const scrollToOffer = () => {
-    document.getElementById('offer')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section className="py-32 md:py-60 bg-[#1a120b] relative overflow-hidden flex items-center justify-center">
       {/* Background Decor */}
@@ -78,12 +74,18 @@ const Offer: React.FC = () => {
 
                   <div className="mb-10 md:mb-14">
                     <p className="text-[#c5a689] text-[9px] md:text-[10px] uppercase tracking-[0.3em] md:tracking-[0.4em] font-bold mb-4">Aproveite o Valor Promocional</p>
-                    <div className="flex items-baseline justify-center gap-1 md:gap-2">
-                       <span className="text-[#1a120b] text-5xl md:text-7xl font-serif tracking-tighter leading-none">R$ 147,00</span>
+                    
+                    {/* Preço de Destaque: 147 Grande */}
+                    <div className="flex flex-col items-center mb-4">
+                      <span className="text-[#1a120b] text-6xl md:text-8xl font-serif tracking-tighter leading-none mb-2">R$ 147</span>
+                      <span className="text-[#1a120b]/60 text-[10px] uppercase tracking-widest font-bold">À Vista no PIX ou Cartão</span>
                     </div>
-                    <p className="text-[#1a120b]/40 text-[10px] md:text-[12px] mt-4 font-medium tracking-wide">
-                      ou 12x de <span className="text-[#1a120b] font-bold">R$ 15,11</span> no cartão de crédito
-                    </p>
+
+                    {/* Preço Parcelado: 15.11 Pequeno */}
+                    <div className="inline-flex items-center gap-2 bg-[#1a120b]/5 px-4 py-2 rounded-full">
+                       <span className="text-[#1a120b]/40 text-[10px] font-medium uppercase tracking-tight">Ou parcele em até</span>
+                       <span className="text-[#1a120b] text-base font-serif italic font-bold">12x R$ 15,11</span>
+                    </div>
                   </div>
 
                   <button className="w-full bg-[#4a3728] text-[#f2f0ed] py-5 md:py-6 rounded-full font-bold uppercase tracking-[0.2em] md:tracking-[0.4em] text-[9px] md:text-[10px] shadow-2xl hover:bg-[#1a120b] transition-all transform active:scale-95 relative group overflow-hidden">

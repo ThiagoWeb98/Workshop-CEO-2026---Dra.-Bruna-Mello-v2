@@ -13,8 +13,8 @@ const Hero: React.FC = () => {
       <div className="absolute top-0 right-0 w-full md:w-1/2 h-full bg-gradient-to-l from-[#4a3728]/20 to-transparent pointer-events-none"></div>
 
       <div className="container mx-auto px-6 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 relative z-10 py-16 md:py-32">
-        <div className="flex flex-col justify-center text-center lg:text-left items-center lg:items-start order-2 lg:order-1">
-          <div className="mb-6 md:mb-10 inline-flex items-center gap-4 md:gap-6 slide-reveal active">
+        <div className="flex flex-col justify-center text-center lg:text-left items-center lg:items-start order-2 lg:order-1 slide-reveal active">
+          <div className="mb-6 md:mb-10 inline-flex items-center gap-4 md:gap-6">
             <div className="hidden sm:block h-px w-8 md:w-16 bg-[#c8a178]"></div>
             <span className="text-[#c8a178] uppercase tracking-[0.4em] md:tracking-[0.7em] text-[7px] md:text-[10px] font-bold">ESTRATÉGIA DE ALTA PERFORMANCE PARA 2026</span>
           </div>
@@ -65,7 +65,7 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        <div className="relative flex items-center justify-center order-1 lg:order-2">
+        <div className="relative flex items-center justify-center order-1 lg:order-2 slide-reveal active">
            <div className="w-full max-w-xs md:max-w-md lg:max-w-lg aspect-[4/5] bg-[#241b14] border border-[#c8a178]/10 shadow-3xl relative group overflow-hidden">
               <img 
                 src="assets/dra-bruna-hero.webp" 
